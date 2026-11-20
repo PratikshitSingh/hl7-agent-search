@@ -9,12 +9,13 @@ description = "HL7 v2 MLLP ingest server + field-level search tool for AI agents
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "mcp>=1.2",
+    "mcp>=2.0,<3",  # uses the v2 MCPServer API
 ]
 
 [project.optional-dependencies]
 agent = ["anthropic>=0.40"]
 dev = [
+    "anthropic>=0.40",  # type-checking scripts/agent_demo.py
     "pytest>=8",
     "pytest-asyncio>=0.23",
     "mypy>=1.10",
