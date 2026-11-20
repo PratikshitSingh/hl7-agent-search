@@ -1,0 +1,9 @@
+live insert (1 commit/msg): 0.28 ms/msg -> ~3,569 msg/s
+bulk load: 100,019 messages in 36.1s (2,770 msg/s, 5k/txn)
+fields rows: 5,426,200 (54.3/message), db size: 458.2 MB
+
+query                                                        p50 ms   p95 ms    total
+patient ADT timeline (MRN+authority, repetition scope)        10.38    12.74       10
+single field eq (MSH.10)                                       0.04     0.05        1
+name prefix (PID.5.1 ^= DO)                                    0.07     0.09       12
+lab value > 290, same OBX (segment scope)                    147.44   175.84    1,028

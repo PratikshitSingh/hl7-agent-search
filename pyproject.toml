@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hl7search"
+version = "0.1.0"
+description = "HL7 v2 MLLP ingest server + field-level search tool for AI agents"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp>=1.2",
+]
+
+[project.optional-dependencies]
+agent = ["anthropic>=0.40"]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "mypy>=1.10",
+    "ruff>=0.5",
+    "hl7>=0.4.5",  # used only as an independent oracle in tests
+]
+
+[project.scripts]
+hl7-server = "hl7search.server:main"
+hl7-send = "hl7search.client:main"
+hl7-seed = "hl7search.seed:main"
+hl7-search = "hl7search.cli:main"
+hl7-mcp = "hl7search.mcp_server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hl7search"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src", "tests", "scripts"]
+
+[[tool.mypy.overrides]]
+module = ["hl7", "hl7.*"]
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
