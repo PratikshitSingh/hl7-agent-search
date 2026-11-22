@@ -25,7 +25,8 @@ hl7-search --db hl7.db -f PID.3.1=12345 -f PID.3.4=MC --scope repetition \
 printf "MSH|^~\&|BUNKERHILL|BH|||20240509144522||ORM^O01|AccessionNumber|P|2.8\rPID|1||PatientID^^^MC^MC||PatientName||PatientBirthDate|\rOBX|1|NM|513230^Bunkerhill - Coronary Calcium Scoring AI^Estimated calcium score||26" | nc -N 127.0.0.1 2575
 ```
 
-**Use it from an agent** (Claude Code / Desktop MCP config):
+**Use it from an agent** (Claude Code / Desktop MCP config). See it working in
+[docs/mcp-live-demo.md](docs/mcp-live-demo.md): Claude in the Claude app, no API key:
 
 ```json
 {"mcpServers": {"hl7": {"command": "/abs/path/.venv/bin/hl7-mcp",
@@ -49,7 +50,7 @@ For a quick look without an LLM: `python scripts/mcp_call.py --db hl7.db --list`
 | `src/hl7search/fields.py` | Human-readable field names and ADT event meanings |
 | `src/hl7search/seed.py` / `client.py` / `cli.py` | Synthetic data, MLLP sender, CLI search |
 | `scripts/` | `agent_demo.py`, `mcp_call.py`, `bench.py` |
-| `docs/` | `agent_transcript.md` (agent session), `benchmark.txt` |
+| `docs/` | `mcp-live-demo.md` (Claude app + MCP, with screenshot), `agent_transcript.md`, `benchmark.txt` |
 
 ## Design decisions (and their trade-offs)
 
